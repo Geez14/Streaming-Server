@@ -4,8 +4,10 @@ from pathlib import Path
 from typing import Dict, Optional
 import os
 
+
 class FileIndexer:
-    def __init__(self, base_dir: str, index_file: str = '.file_index.json'):
+
+    def __init__(self, base_dir: str, index_file: str = ".file_index.json"):
         self.base_dir = Path(base_dir)
         self.index_file = Path(os.getenv("SERVER_INDEX", self.base_dir))
         if not self.index_file.exists():
@@ -20,10 +22,10 @@ class FileIndexer:
         """Load existing index from file if it exists."""
         try:
             if self.index_file.exists():
-                with open(self.index_file, 'r') as f:
+                with open(self.index_file, "r") as f:
                     data = json.load(f)
-                    self.file_map = data.get('file_map', {})
-                    self.path_map = data.get('path_map', {})
+                    self.file_map = data.get("file_map", {})
+                    self.path_map = data.get("path_map", {})
         except Exception as e:
             print(f"Error loading index: {e} | or no index exists")
             self.file_map = {}
@@ -32,11 +34,12 @@ class FileIndexer:
     def save_index(self):
         """Save current index to file."""
         try:
-            with open(self.index_file, 'w') as f:
-                json.dump({
-                    'file_map': self.file_map,
-                    'path_map': self.path_map
-                }, f, indent=2)
+            with open(self.index_file, "w") as f:
+                json.dump(
+                    {"file_map": self.file_map, "path_map": self.path_map},
+                    f,
+                    indent=2,
+                )
         except Exception as e:
             print(f"Error saving index: {e}")
 
@@ -47,11 +50,11 @@ class FileIndexer:
     def get_short_code(self, full_path: Path) -> str:
         """Get or create short code for a path."""
         rel_path = str(full_path.relative_to(self.base_dir))
-        
+
         # Return existing code if path is already indexed
         if rel_path in self.path_map:
             return self.path_map[rel_path]
-        
+
         # Generate new code and ensure it's unique
         while True:
             short_code = self.generate_short_code(rel_path)
@@ -71,17 +74,17 @@ class FileIndexer:
         """Remove entries for files that no longer exist."""
         to_remove_file = []
         to_remove_path = []
-        
+
         for short_code, rel_path in self.file_map.items():
             full_path = self.base_dir / rel_path
             if not full_path.exists():
                 to_remove_file.append(short_code)
                 to_remove_path.append(rel_path)
-        
+
         for code in to_remove_file:
             del self.file_map[code]
         for path in to_remove_path:
             del self.path_map[path]
-        
+
         if to_remove_file:
             self.save_index()

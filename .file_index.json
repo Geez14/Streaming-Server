@@ -1,0 +1,30 @@
+{
+  "file_map": {
+    "a53d9769108a807d": ".git",
+    "236455cc90628414": "__pycache__",
+    "0fea6a13c52b4d47": "cache",
+    "fed36e93a0509e20": "templates",
+    "e124e7543d581ff8": "venv",
+    "b4ef698db8ca845e": "requirements.txt",
+    "f579cccc964135c7": ".env",
+    "a084b794bc0759e7": ".gitignore",
+    "3f41e546893dc64b": "app.py",
+    "1e290ac8433d555b": "Readme.md",
+    "04d2c9518498da64": "utils.py",
+    "1c169d0950b0eb1c": ".file_index.json"
+  },
+  "path_map": {
+    ".git": "a53d9769108a807d",
+    "__pycache__": "236455cc90628414",
+    "cache": "0fea6a13c52b4d47",
+    "templates": "fed36e93a0509e20",
+    "venv": "e124e7543d581ff8",
+    "requirements.txt": "b4ef698db8ca845e",
+    ".env": "f579cccc964135c7",
+    ".gitignore": "a084b794bc0759e7",
+    "app.py": "3f41e546893dc64b",
+    "Readme.md": "1e290ac8433d555b",
+    "utils.py": "04d2c9518498da64",
+    ".file_index.json": "1c169d0950b0eb1c"
+  }
+}
